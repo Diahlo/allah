@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BananEmporium - Ditt Banansenter</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        header {
+            background-color: #ffeb3b;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 2px -2px gray;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #3e2723;
+        }
+        nav {
+            background-color: #333;
+            padding: 15px;
+            text-align: center;
+        }
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: #ffeb3b;
+            font-weight: bold;
+            font-size: 1.2em;
+            transition: color 0.3s ease;
+        }
+        nav a:hover {
+            color: #fff;
+        }
+        .hero {
+            background: url('https://images.unsplash.com/photo-1574226516831-e1dff420e18e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDJ8fGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080') no-repeat center center/cover;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            position: relative;
+            animation: slideIn 1.5s ease-out forwards;
+        }
+        @keyframes slideIn {
+            from { transform: translateY(-100%); }
+            to { transform: translateY(0); }
+        }
+        .hero h2 {
+            font-size: 4em;
+            margin: 0;
+            padding: 0 20px;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 10px;
+        }
+        .intro {
+            padding: 60px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+        .intro h2 {
+            font-size: 2.8em;
+            margin-bottom: 20px;
+        }
+        .intro p {
+            font-size: 1.2em;
+            line-height: 1.5;
+            max-width: 800px;
+            margin: 0 auto;
+            color: #555;
+        }
+        .products {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 40px 0;
+            padding: 20px;
+        }
+        .product {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+            width: 30%;
+            margin: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .product:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+        .product img {
+            width: 100%;
+            border-bottom: 3px solid #ffc107;
+            padding-bottom: 15px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            border-radius: 10px 10px 0 0;
+        }
+        .product img:hover {
+            transform: scale(1.05);
+        }
+        .product h3 {
+            margin: 15px 0;
+            font-size: 1.8em;
+            color: #333;
+        }
+        .product p {
+            color: #777;
+            font-size: 1.1em;
+            margin-bottom: 15px;
+        }
+        .product button {
+            background-color: #ffeb3b;
+            border: none;
+            padding: 12px 25px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        .product button:hover {
+            background-color: #ffc107;
+        }
+        footer {
+            background-color: #333;
+            color: #ffeb3b;
+            text-align: center;
+            padding: 30px;
+            margin-top: 60px;
+        }
+        footer p {
+            margin: 10px 0;
+            font-size: 1.2em;
+        }
+        footer ul {
+            list-style: none;
+            padding: 0;
+        }
+        footer ul li {
+            display: inline;
+            margin: 0 15px;
+        }
+        footer ul li a {
+            text-decoration: none;
+            color: #ffeb3b;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        footer ul li a:hover {
+            color: #fff;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            z-index: 10000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding-top: 60px;
+        }
+        #modal-content {
+            background-color: #fff;
+            margin: 5% auto;
+            padding: 30px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 700px;
+            border-radius: 10px;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>BananEmporium</h1>
+</header>
+
+<nav>
+    <a href="#home">Hjem</a>
+    <a href="#products">Produkter</a>
+    <a href="#contact">Kontakt</a>
+</nav>
+
+<section class="hero" id="home">
+    <h2>Bananer for Alle</h2>
+</section>
+
+<section class="intro">
+    <h2>Velkommen til BananEmporium</h2>
+    <p>Vi er stolte av å tilby et bredt utvalg av bananer, fra den lille snackpakken til den store leveransen. Utforsk vårt utvalg og finn bananene som passer perfekt for deg!</p>
+</section>
+
+<section class="products" id="products">
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1587643980243-49291e986c71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDd8fGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080" alt="1kg Bananer" onclick="openModal('1kg')">
+        <h3>1 kg Bananer</h3>
+        <p>Perfekt for en liten familie!</p>
+        <button onclick="openModal('1kg')">Les mer</button>
+    </div>
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1582281298054-f7abf06adff8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDl8fGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080" alt="5kg Bananer" onclick="openModal('5kg')">
+        <h3>5 kg Bananer</h3>
+        <p>For deg som elsker bananer.</p>
+        <button onclick="openModal('5kg')">Les mer</button>
+    </div>
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1576014077614-e6b190cd0f99?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDR8fGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080" alt="10kg Bananer" onclick="openModal('10kg')">
+        <h3>10 kg Bananer</h3>
+        <p>Hold deg sunn hele uken.</p>
+        <button onclick="openModal('10kg')">Les mer</button>
+    </div>
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1608162258907-c8753a88e163?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDF8fGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080" alt="20kg Bananer" onclick="openModal('20kg')">
+        <h3>20 kg Bananer</h3>
+        <p>Storhandel for store familier.</p>
+        <button onclick="openModal('20kg')">Les mer</button>
+    </div>
+    <div class="product">
+        <img src="https://images.unsplash.com/photo-1553984840-bde83ad012a0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxMTc3M3wwfDF8c2VhcmNofDkxfGJhbmFuYXxlbnwwfHx8fDE2MzUwNzgxNjM&ixlib=rb-1.2.1&q=80&w=1080" alt="1000kg Bananer" onclick="openModal('1000kg')">
+        <h3>1000 kg Bananer</h3>
+        <p>Forhandlere og spesialtilfeller.</p>
+        <button onclick="openModal('1000kg')">Les mer</button>
+    </div>
+</section>
+
+<section id="modal">
+    <div id="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <h2 id="modal-title"></h2>
+        <p id="modal-description"></p>
+    </div>
+</section>
+
+<footer>
+    <p>© 2024 BananEmporium - Alle rettigheter reservert.</p>
+    <ul>
+        <li><a href="#home">Hjem</a></li>
+        <li><a href="#products">Produkter</a></li>
+        <li><a href="#contact">Kontakt</a></li>
+    </ul>
+</footer>
+
+<script>
+    function openModal(productId) {
+        document.getElementById('modal').style.display = "block";
+        document.getElementById('modal-title').innerText = productId + " Bananer";
+        document.getElementById('modal-description').innerText = "Mer informasjon om " + productId + " bananer.";
+    }
+
+    function closeModal() {
+        document.getElementById('modal').style.display = "none";
+    }
+</script>
+
+</body>
+</html>
