@@ -7,23 +7,39 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="theme-toggle">
+            <input type="checkbox" id="theme-toggle">
+            <span class="slider round"></span>
+        </label>
+    </div>
+
     <div class="container">
         <div class="profile-pic">
             <img src="me.jpg" alt="black guy">
         </div>
         <div class="about">
             <h1>About Me</h1>
-            <p>i foooking love cs </p>
+            <p>I foooking love CS</p>
             <h2>Skills</h2>
             <ul>
-                <li>Csgo</li>
-                <li>R6 NOT</li>
-                <li>being coolll</li>
-                <li>Nigg</li>
+                <li>CS:GO</li>
+                <li>R6 (Not)</li>
+                <li>Being cool</li>
+                <li>Gaming</li>
             </ul>
             <h2>Contact Me</h2>
-            <p>Feel free to reach out through discord "yzgv"
+            <p>Feel free to reach out through Discord: "yzgv"</p>
         </div>
     </div>
+
+    <script>
+        const toggleSwitch = document.getElementById('theme-toggle');
+        const body = document.body;
+
+        toggleSwitch.addEventListener('change', () => {
+            body.classList.toggle('dark-mode');
+        });
+    </script>
 </body>
 </html>
